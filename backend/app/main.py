@@ -3,7 +3,6 @@ import uvicorn
 from fastapi import Depends, FastAPI
 from fastapi.responses import JSONResponse
 
-
 app = FastAPI()
 
 TICKET_FILEPATH = "../data/awesome_tickets.json"
