@@ -4,8 +4,7 @@
 
 # Configure the Environment:
 
--Create a '.env' file in the root directory.
--Add the following content to the '.env' file:
+Create a '.env' file in the root directory and add the following content to the '.env' file:
  
  TICKET_FILEPATH=./path/to/awesome_tickets.json
 
