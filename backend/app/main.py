@@ -2,10 +2,12 @@ from app.repositories.ticket_repository import TicketRepository
 import uvicorn
 from fastapi import  FastAPI
 from app.routers import ticket_route
-
+from app.repositories.message_repository import MessageRepository
+from app.routers import message_route  
 app = FastAPI()
 
 app.include_router(ticket_route.router, tags=["tickets"])
+app.include_router(message_route.router, tags=["messages"])
 @app.get("/healthz")
 async def root():
     return "OK"

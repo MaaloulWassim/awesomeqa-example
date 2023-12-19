@@ -27,7 +27,7 @@ class MessageType(BaseModel):
     community_server_id: str
     timestamp: datetime
     has_attachment: bool
-    reference_msg_id: str
+    reference_msg_id: Optional[str]
     timestamp_insert: datetime
     discussion_id: str
     author_id: str

@@ -9,3 +9,9 @@ class TicketRepository:
 
     def get_tickets(self, start: Optional[int] = None, stop: Optional[int] = None) -> List[TicketType]:
         return [TicketType(**ticket) for ticket in self.data["tickets"][start:stop]]    
+    
+    def get_ticket_by_id(self, ticket_id: str) -> Optional[TicketType]:
+        for ticket in self.data["tickets"]:
+            if ticket["id"] == ticket_id:
+                return TicketType(**ticket)
+        return None    
