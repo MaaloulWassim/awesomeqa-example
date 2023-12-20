@@ -3,6 +3,7 @@ from app.repositories.message_repository import MessageRepository
 from app.models.message_model import MessageType
 from app.config import TICKET_FILEPATH
 from typing import List
+from app.models.author_model import Author
 
 router = APIRouter()
 
@@ -17,3 +18,10 @@ async def get_message(msg_id: str, message_repository: MessageRepository = Depen
 async def get_all_messages(start: int = 0, stop: int = 20,message_repository: MessageRepository = Depends(lambda: MessageRepository(filepath=TICKET_FILEPATH))):
     messages = message_repository.get_all_messages(start, stop)
     return messages
+
+@router.get("/messages/{msg_id}/author", response_model=Author)
+async def get_author_by_message_id(msg_id: str, message_repository: MessageRepository = Depends(lambda: MessageRepository(filepath=TICKET_FILEPATH))):
+    author = message_repository.get_author_by_message_id(msg_id)
+    if not author:
+        raise HTTPException(status_code=404, detail="Author not found")
+    return author

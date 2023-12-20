@@ -18,3 +18,9 @@ class MessageRepository:
             if message["id"] == msg_id:
                 return MessageType(**message)
         return None
+
+    def get_author_by_message_id(self, msg_id: str) -> Optional[str]:
+        message = self.get_message_by_id(msg_id)
+        if message:
+            return message.author
+        return None
