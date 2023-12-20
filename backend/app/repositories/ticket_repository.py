@@ -15,3 +15,10 @@ class TicketRepository:
             if ticket["id"] == ticket_id:
                 return TicketType(**ticket)
         return None    
+
+    def get_tickets_count(self) -> int:
+        return len(self.data["tickets"])
+    
+    def get_number_of_open_tickets(self) -> int:
+        open_tickets = sum(1 for ticket in self.data["tickets"] if ticket["status"] == "open")
+        return open_tickets

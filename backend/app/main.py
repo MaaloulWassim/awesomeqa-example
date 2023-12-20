@@ -1,9 +1,8 @@
 from app.repositories.ticket_repository import TicketRepository
 import uvicorn
 from fastapi import  FastAPI
-from app.routers import ticket_route
+from app.routers import ticket_route, message_route
 from app.repositories.message_repository import MessageRepository
-from app.routers import message_route  
 app = FastAPI()
 
 app.include_router(ticket_route.router, tags=["tickets"])
