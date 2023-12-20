@@ -22,3 +22,16 @@ class TicketRepository:
     def get_number_of_open_tickets(self) -> int:
         open_tickets = sum(1 for ticket in self.data["tickets"] if ticket["status"] == "open")
         return open_tickets
+
+    def remove_ticket(self, ticket_id: str) -> bool:
+        tickets = self.data["tickets"]
+        for i, ticket in enumerate(tickets):
+            if ticket["id"] == ticket_id:
+                del tickets[i]
+                self._save_data()
+                return True
+        return False
+
+    def _save_data(self):
+        with open(self.filepath, "w") as json_file:
+            json.dump(self.data, json_file, indent=2)

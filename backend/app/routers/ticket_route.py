@@ -25,3 +25,10 @@ async def get_tickets_count( ticket_repository: TicketRepository = Depends(lambd
     opened_count = ticket_repository.get_number_of_open_tickets()
     total_count = ticket_repository.get_tickets_count()
     return {"opened": opened_count,"closed": total_count-opened_count ,"total": total_count }
+
+@router.delete("/tickets/{ticket_id}", response_model=dict)
+async def remove_ticket(ticket_id: str, ticket_repository: TicketRepository = Depends(lambda: TicketRepository(filepath=TICKET_FILEPATH))):
+    removed = ticket_repository.remove_ticket(ticket_id)
+    if not removed:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    return {"message": "Ticket removed successfully"}
