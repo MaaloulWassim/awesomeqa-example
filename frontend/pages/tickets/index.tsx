@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import Ticket from '../../components/ticket/ticket';
-import { getTickets } from '../../services/services';
+import { getTickets,removeTicket  } from '../../services/services';
 import { TicketType } from '../../constants/models';
 import styles from './TicketsPage.module.css';
 
@@ -21,13 +21,20 @@ const TicketsPage = () => {
 
     fetchTickets();
   }, []);
-
+  const handleDeleteTicket = async (ticketId: string) => {
+    try {
+      await removeTicket(ticketId);
+      setTickets((prevTickets) => prevTickets.filter((ticket) => ticket.id !== ticketId));
+    } catch (error) {
+      console.error('Error deleting ticket:', error);
+    }
+  };
   return (
     <div className={styles.ticketsContainer}>
     {tickets.map((ticket) => (
       <div key={ticket.id} className={styles.ticketsRow}>
         <Grid item className={styles.ticketsGridItem}>
-          <Ticket ticket={ticket} />
+          <Ticket ticket={ticket} onDelete={handleDeleteTicket}/>
         </Grid>
       </div>
     ))}
