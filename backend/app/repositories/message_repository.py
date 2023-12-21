@@ -24,3 +24,4 @@ class MessageRepository:
         if message:
             return message.author
         return None
+    

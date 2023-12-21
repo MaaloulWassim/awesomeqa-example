@@ -1,19 +1,10 @@
-import React , { useState } from "react";
-import { TicketType } from "../../constants/models";
+import React from "react";
 import styles from "./Ticket.module.css";
 import { Typography, Box,Divider,Button, Link  } from "@mui/material";
-type TicketProps = {
-  ticket: TicketType;
-  onDelete: (ticketId: string) => void;
-};
 
 const Ticket = ({ ticket ,onDelete }) => {
   const { id, status, resolved_by, ts_last_status_change, timestamp, context_messages } = ticket;
-  const [showMessages, setShowMessages] = useState(false);
-  const handleViewMessages = (event) => {
-    event.preventDefault();
-    setShowMessages(!showMessages);
-  };
+
   const handleDeleteClick = () => {
     onDelete(id);
   };
@@ -53,27 +44,14 @@ const Ticket = ({ ticket ,onDelete }) => {
     <Divider />
 
     <Box className={styles.item}>
-        <Typography variant="h6" className={styles.header}>
-          Context Messages:
-        </Typography>
-        <Link href="#" className={styles.link} onClick={(event) => handleViewMessages(event)}>
-          <Button variant="outlined">View Messages</Button>
-        </Link>
-      </Box>
+      <Typography variant="h6" className={styles.header}>
+       Context Messages:
+      </Typography>
+         <Link href={`messages?id=${id}`} className={styles.link}>
+           <Button variant="outlined" >View Messages</Button>
+         </Link>
+    </Box>
 
-      {showMessages && (
-        <Box className={styles.messagesContainer}>
-          {context_messages.map((messageId) => (
-         <>
-         <Typography>MessageId : </Typography>
-            <Link key={messageId} href={`#message/${messageId}`} className={styles.messageLink}>
-              {messageId}
-            </Link>
-         </>
-         
-          ))}
-        </Box>
-      )}
       <Divider />
       <div>
         <Button className={styles.deleteButton} variant="outlined" color="error" onClick={handleDeleteClick}>

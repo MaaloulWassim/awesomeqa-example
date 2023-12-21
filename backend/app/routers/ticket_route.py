@@ -1,14 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from app.repositories.ticket_repository import TicketRepository
+from app.repositories.message_repository import MessageRepository
 from app.config import TICKET_FILEPATH
 from typing import Optional,List
 from app.models.ticket_model import TicketType
+from app.models.message_model import MessageType
 
 router = APIRouter()
 
 @router.get("/tickets", response_model=List[TicketType])
-async def get_tickets(start: int = 0, stop: int = 20, ticket_repository: TicketRepository = Depends(lambda: TicketRepository(filepath=TICKET_FILEPATH))):
+async def get_tickets(start: int = 0, stop: int = 150, ticket_repository: TicketRepository = Depends(lambda: TicketRepository(filepath=TICKET_FILEPATH))):
     tickets = ticket_repository.get_tickets(start, stop)
     return tickets
 
@@ -32,3 +34,8 @@ async def remove_ticket(ticket_id: str, ticket_repository: TicketRepository = De
     if not removed:
         raise HTTPException(status_code=404, detail="Ticket not found")
     return {"message": "Ticket removed successfully"}
+
+@router.get("/tickets/{ticket_id}/messages", response_model=List[MessageType])
+async def get_messages_for_ticket(ticket_id: str, ticket_repository: TicketRepository = Depends(lambda: TicketRepository(filepath=TICKET_FILEPATH))):
+    messages = ticket_repository.get_messages_for_ticket(ticket_id)
+    return messages

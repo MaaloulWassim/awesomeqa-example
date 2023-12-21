@@ -22,14 +22,24 @@ export const removeTicket = async (ticketId: string) => {
   }
 };
 
-export const getMessageById = async (messageId: string): Promise<MessageType>  => {
+export const getMessageById = async (msg_id: string): Promise<MessageType>  => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/messages/${messageId}`);
+    const response = await axios.get<MessageType>(`${API_BASE_URL}/messages/${msg_id}`);
     return response.data;
   } catch (error) {
-    throw error.response.data;
+    throw error;
   }
 };
+
+export const getMessagesForTicket = async (ticketId: string): Promise<MessageType[]>  => {
+  try {
+    const response = await axios.get<MessageType[]>(`${API_BASE_URL}/tickets/${ticketId}/messages`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 export const getAuthorByMessageId = async (messageId: string): Promise<AuthorType>  => {
   try {
