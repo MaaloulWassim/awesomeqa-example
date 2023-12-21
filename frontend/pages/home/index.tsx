@@ -6,10 +6,13 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import ButtonCard from "../../components/buttonCard/buttonCard";
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const handleButtonClick = (buttonText: string) => {
-    console.log(buttonText);
+  const router= useRouter();
+
+  const handleButtonClick = (page: string) => {
+    router.push(`/${page.toLowerCase()}`);
   };
 
   return (
@@ -17,13 +20,13 @@ const Home: NextPage = () => {
       <Box sx={{ flexGrow: 1, mt: 15, mb: 15 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
-            <ButtonCard icon={<LibraryBooksIcon fontSize="large" />} buttonText="Knowledge Base" onClick={() => handleButtonClick("Knowledge Base")} />
+            <ButtonCard icon={<LibraryBooksIcon fontSize="large" />} buttonText="Knowledge Base" onClick={() => console.log("Knowledge Base")} />
           </Grid>
           <Grid item xs={12} md={4}>
-            <ButtonCard icon={<SupportAgentIcon fontSize="large" />} buttonText="Tickets" onClick={() => handleButtonClick("Tickets")} />
+            <ButtonCard icon={<SupportAgentIcon fontSize="large" />} buttonText="Tickets" onClick={() => handleButtonClick("tickets")} />
           </Grid>
           <Grid item xs={12} md={4}>
-            <ButtonCard icon={<LightbulbIcon fontSize="large" />} buttonText="FAQ Insights" onClick={() => handleButtonClick("FAQ Insights")} />
+            <ButtonCard icon={<LightbulbIcon fontSize="large" />} buttonText="FAQ Insights" onClick={() => console.log("FAQ Insights")} />
           </Grid>
          
         </Grid>

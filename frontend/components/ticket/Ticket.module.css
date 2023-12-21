@@ -1,0 +1,42 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #302F36;
+    background: #1C1C1F;
+  }
+  .closed {
+    color: rgba(255, 22, 22, 0.903);
+  }
+  
+  .open {
+    color: rgb(34, 213, 34);
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;}
+  
+  .header {
+    color: #61dafb;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .data {
+    color: #F7F8F8;
+    font-size: 14px;
+  }
+  
+  .link {
+    color: #61dafb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }

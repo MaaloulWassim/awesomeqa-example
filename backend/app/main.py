@@ -3,7 +3,17 @@ import uvicorn
 from fastapi import  FastAPI
 from app.routers import ticket_route, message_route
 from app.repositories.message_repository import MessageRepository
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(ticket_route.router, tags=["tickets"])
 app.include_router(message_route.router, tags=["messages"])

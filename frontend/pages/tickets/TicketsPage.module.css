@@ -1,0 +1,19 @@
+.ticketsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  width: 100%;
+  
+}
+.ticketsRow {
+  display: flex;
+  gap: 16px;
+}
+
+.ticketsGridItem {
+  flex: 1;
+  max-width: 400px; 
+
+}

@@ -9,6 +9,11 @@
     border-radius: 8px;
     border: 1px solid #302F36;
     background: #1C1C1F;
+    cursor: pointer;
+}
+.card:hover{
+    text-decoration: none;
+    color: #00ff5ebd;
 }
 .icon{
     display: flex;
@@ -21,7 +26,6 @@
     background: rgba(93, 80, 195, 0.20);
 }
 .title{
-    color: white;
     align-self: stretch;
     color: #F7F8F8;
     font-feature-settings: 'clig' off, 'liga' off;
