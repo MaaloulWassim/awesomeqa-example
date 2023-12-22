@@ -17,3 +17,15 @@
   max-width: 400px; 
 
 }
+
+.ticketCount{
+  align-self: stretch;
+  color: #F7F8F8;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 116.7%;
+  margin: 10px 0 0 40%;
+}

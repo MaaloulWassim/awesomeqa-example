@@ -13,6 +13,16 @@ export const getTickets = async (): Promise<TicketType[]> => {
   }
 };
 
+export const getTicketsCount = async (): Promise<any> => {
+  try {
+    const response = await axios.get<any>(`${API_BASE_URL}/ticketscount`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching tickets count:", error);
+    throw error;
+  }
+};
+
 export const removeTicket = async (ticketId: string) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}/tickets/${ticketId}`);

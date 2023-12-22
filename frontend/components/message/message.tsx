@@ -1,7 +1,8 @@
-import React from "react";
-import { MessageType } from "../../constants/models";
+import React, { useState } from "react";
+import { AuthorType, MessageType } from "../../constants/models";
 import styles from "./Message.module.css";
 import { Typography, Box, Divider, Link } from "@mui/material";
+import AuthorCard from "../authorCard/authorCard";
 
 type MessageProps = {
   message: MessageType;
@@ -17,7 +18,18 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     has_attachment,
     reference_msg_id,
   } = message;
+  const [showAuthorCard, setShowAuthorCard] = useState(false);
+  const [selectedAuthor, setSelectedAuthor] = useState<AuthorType | null>(null);
 
+  const handleAuthorClick = (event,authorData: AuthorType) => {
+    event.preventDefault();
+    setSelectedAuthor(authorData);
+    setShowAuthorCard(true);
+  };
+
+  const handleCloseAuthorCard = () => {
+    setShowAuthorCard(false);
+  };
   return (
     <Box className={styles.messageCard}>
       <Typography variant="h6" className={styles.messageHeader}>
@@ -32,9 +44,13 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       </Box>
       <Divider />
         <Box>
-        <Typography variant="body2" className={styles.messageDetails}>
-          Author: <Link href="#">{author.name}</Link>
-        </Typography>
+        <Typography variant="body2">
+        Author: <Link href="#" onClick={() => handleAuthorClick(event,author)}> {author.name}</Link>
+      </Typography>
+
+      {showAuthorCard && selectedAuthor && (
+        <AuthorCard authorData={selectedAuthor} onClose={handleCloseAuthorCard} />
+      )}
         </Box>
         <Divider />
       <Box className={styles.messageItem}>
@@ -53,7 +69,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       <Divider />
       <Box>
       <Typography variant="body2" className={styles.messageDetails}>
-          Message URL: {msg_url}
+          Message URL: <Link >{msg_url}</Link>
         </Typography>
       </Box>
     </Box>
