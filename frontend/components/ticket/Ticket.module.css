@@ -44,27 +44,6 @@
   .link:hover {
     text-decoration: underline;
   }
-
-  .messagesContainer {
-    margin-top: 16px;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #302f36;
-    background: #1c1c1f;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .messageLink {
-    color: #61dafb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .messageLink:hover {
-    text-decoration: underline;
-  }
   .deleteButton{
     margin-top: 10px;
     margin-left: 40%;
