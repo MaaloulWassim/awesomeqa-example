@@ -12,6 +12,14 @@ export const getTickets = async (): Promise<TicketType[]> => {
     throw error;
   }
 };
+export const getTicketById = async (ticketId: string): Promise<TicketType>  => {
+  try {
+    const response = await axios.get<TicketType>(`${API_BASE_URL}/tickets/${ticketId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getTicketsCount = async (): Promise<any> => {
   try {

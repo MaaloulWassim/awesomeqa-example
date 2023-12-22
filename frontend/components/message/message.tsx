@@ -33,10 +33,8 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   return (
     <Box className={styles.messageCard}>
       <Typography variant="h6" className={styles.messageHeader}>
-        Message ID: {id}
+        Message:
       </Typography>
-      <Divider />
-
       <Box className={styles.messageItem}>
         <Typography variant="body1" className={styles.messageContent}>
           {content}
