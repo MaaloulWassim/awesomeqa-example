@@ -11,39 +11,40 @@ const MessagesPage = () => {
   const [ticket, setTicket] = useState<TicketType>();
   const [message, setMessage] = useState<MessageType>();
   useEffect(() => {
-    const fetchMessages = async () => {
+    let isMounted = true;
+  
+    const fetchData = async () => {
       try {
-        const response = await getMessagesForTicket(id as string);
-        console.log(response)
-        setMessages(response);
+        const ticketResponse = await getTicketById(id as string);
+        if (isMounted) {
+          setTicket(ticketResponse);
+        }
+  
+        const messagesResponse = await getMessagesForTicket(id as string);
+        if (isMounted) {
+          setMessages(messagesResponse);
+        }
+  
+        if (ticketResponse && ticketResponse.msg_id) {
+          const messageResponse = await getMessageById(ticketResponse.msg_id);
+          if (isMounted) {
+            setMessage(messageResponse);
+          }
+        }
       } catch (error) {
-        console.error('Error fetching messages:', error);
+        console.error('Error fetching data:', error);
       }
     };
-    const fetchTicket = async () => {
-      try {
-        const response = await getTicketById(id as string);
-        console.log(response)
-        setTicket(response);
-      } catch (error) {
-        console.error('Error fetching ticket:', error);
-      }
-    };
-    const fetchMessageContent = async () => {
-      try {
-        const response = await getMessageById(ticket.msg_id as string);
-        console.log(response)
-        setMessage(response);
-      } catch (error) {
-        console.error('Error fetching ticket:', error);
-      }
-    };
-    if (id) {
-      fetchMessages();
-      fetchTicket();
-      fetchMessageContent();
+  
+    if (id && !ticket && !messages.length && !message) {
+      fetchData();
     }
-  }, [id]);
+  
+    return () => {
+      isMounted = true;
+    };
+  }, [id, ticket, messages, message]);
+  
 
   if (!messages.length) {
     return <div>No messages found.</div>;
@@ -51,8 +52,8 @@ const MessagesPage = () => {
 
   return (
     <div>
-      <h4>Messages Related to : {message.content}</h4>
-      {messages.map((message) => (
+      <h4>Messages Related to : {message?.content}</h4>
+      {messages.map((message:MessageType) => (
         <Message key={message.id} message={message} />
       ))}
     </div>

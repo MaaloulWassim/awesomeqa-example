@@ -1,7 +1,7 @@
 from app.repositories.ticket_repository import TicketRepository
 import uvicorn
 from fastapi import  FastAPI
-from app.routers import ticket_route, message_route
+from app.routes import ticket_route, message_route
 from app.repositories.message_repository import MessageRepository
 from fastapi.middleware.cors import CORSMiddleware
 
