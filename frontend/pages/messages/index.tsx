@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getMessagesForTicket } from '../../services/services';
 import { MessageType } from '../../constants/models';
+import Message from '../../components/message/message';
 
 const MessagesPage = () => {
   const router = useRouter();
@@ -32,9 +33,7 @@ const MessagesPage = () => {
     <div>
       <h2>Messages for Ticket ID: {id}</h2>
       {messages.map((message) => (
-        <div key={message.id}>
-          <p>{message.content}</p>
-        </div>
+        <Message key={message.id} message={message} />
       ))}
     </div>
   );

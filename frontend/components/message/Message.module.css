@@ -1,0 +1,46 @@
+.messageCard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 16px;
+    padding: 16px;
+    gap: 5px;
+    border-radius: 8px;
+    border: 1px solid #302f36;
+    background: #1c1c1f;
+  }
+  
+  .messageHeader {
+    color: #61dafb;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .messageItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .messageContent {
+    color: #f7f8f8;
+    font-size: 14px;
+  }
+  
+  .messageDetails {
+    color: #f7f8f8;
+    font-size: 14px;
+  }
+  
+  .messageLink {
+    color: #61dafb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .messageLink:hover {
+    text-decoration: underline;
+  }
+  
