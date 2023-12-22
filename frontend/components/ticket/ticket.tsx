@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./Ticket.module.css";
 import { Typography, Box,Divider,Button, Link  } from "@mui/material";
 import { getMessageById } from "../../services/services";
+import { useRouter } from 'next/router';
 
 const Ticket = ({ ticket ,onDelete }) => {
+  const router = useRouter();
+
   const { id, msg_id, status, resolved_by, ts_last_status_change, timestamp, context_messages } = ticket;
   const [messageContent, setMessageContent] = useState("");
   useEffect(() => {
@@ -22,6 +25,9 @@ const Ticket = ({ ticket ,onDelete }) => {
   }, [msg_id]);
   const handleDeleteClick = () => {
     onDelete(id);
+  };
+  const handleViewMessages = () => {
+    router.push(`/messages?id=${id}`);
   };
   return (
     <Box className={styles.card}>
@@ -62,13 +68,17 @@ const Ticket = ({ ticket ,onDelete }) => {
       <Typography variant="h6" className={styles.header}>
        Context Messages:
       </Typography>
-         <Link href={`messages?id=${id}`} className={styles.link}>
-           <Button variant="outlined" >View Messages</Button>
-         </Link>
+      <Link  className={styles.link}>
+      <Button variant="outlined" onClick={handleViewMessages}>
+        View Messages
+      </Button>
+      </Link>
+      
+    
     </Box>
 
       <Divider />
-      <div>
+        <div>
         <Button className={styles.deleteButton} variant="outlined" color="error" onClick={handleDeleteClick}>
           Delete
         </Button>

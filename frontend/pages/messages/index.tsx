@@ -47,7 +47,7 @@ const MessagesPage = () => {
   
 
   if (!messages.length) {
-    return <div>No messages found.</div>;
+    return <div>Loading Messages ... </div>;
   }
 
   return (
