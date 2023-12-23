@@ -15,7 +15,7 @@ async def get_message(msg_id: str, message_repository: MessageRepository = Depen
     return message
 
 @router.get("/messages", response_model=List[MessageType])
-async def get_all_messages(start: int = 0, stop: int = 20,message_repository: MessageRepository = Depends(lambda: MessageRepository(filepath=TICKET_FILEPATH))):
+async def get_all_messages(start: int = 0, stop: int = 5,message_repository: MessageRepository = Depends(lambda: MessageRepository(filepath=TICKET_FILEPATH))):
     messages = message_repository.get_all_messages(start, stop)
     return messages
 
